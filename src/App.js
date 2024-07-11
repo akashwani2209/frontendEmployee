@@ -1,24 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './Navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EmployeeForm from './EmployeeForm';
 import EmployeeTable from './EmployeeTable';
-import './App.css'; // Import your CSS file
+import Navbar from './Navbar'; // Make sure to import Navbar
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar />
-
-        <Switch>
-          <Route exact path="/">
-            <EmployeeForm />
-          </Route>
-          <Route path="/table">
-            <EmployeeTable />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<EmployeeForm />} />
+          <Route path="/table" element={<EmployeeTable />} />
+        </Routes>
       </div>
     </Router>
   );
