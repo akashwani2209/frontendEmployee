@@ -9,16 +9,26 @@ function EmployeeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // For demonstration, log form values
-    console.log('Name:', name);
-    console.log('Designation:', designation);
-    console.log('LanID:', lanID);
-    console.log('Task Assigned:', taskAssigned);
-    // Reset form fields
-    setName('');
-    setDesignation('');
-    setLanID('');
-    setTaskAssigned('');
+    
+    const employee = { name, designation, lanID, taskAssigned };
+
+    fetch('http://localhost:8080/api/employees', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(employee),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Employee created:', data);
+        // Reset form fields
+        setName('');
+        setDesignation('');
+        setLanID('');
+        setTaskAssigned('');
+      })
+      .catch(error => console.error('Error creating employee:', error));
   };
 
   return (
